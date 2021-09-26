@@ -1,14 +1,16 @@
 {
-  "name": "backend",
+  "name": "ecommerce",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "backend of ecommerce",
+  "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "prettier": "^2.4.1"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13"
   }
 }
