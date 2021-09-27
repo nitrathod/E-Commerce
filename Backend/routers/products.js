@@ -4,11 +4,13 @@ const { Category } = require('../models/category');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-
-
 // Fetch all product list
 router.get(`/`, async (req, res) => {
-  const productList = await Product.find().populate('category');
+  let filter = {};
+  if(req.query.categories){
+    filter = {category: req.query.categories.split(',')};
+  }
+  const productList = await Product.find(filter).populate('category');
 
   if (!productList) {
     res.status(500).json('Cannot find product, either product does not exist or may be deleted.');
@@ -125,5 +127,16 @@ router.get(`/get/count`, (req, res) => {
       })
   });
 })
+
+//Filtering product count by featured flag
+router.get(`/get/featured/:count`, async (req, res) => {
+  const count = req.params.count ? req.params.count : 0;
+  const productFeatured = await Product.find({isFeatured: true}).limit(count);
+
+  if (!productFeatured) {
+    res.status(500).json({success: false});
+  }
+  res.send(productFeatured);
+});
 
 module.exports = router;
