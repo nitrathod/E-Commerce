@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 //Fetch all user details
 router.get(`/`, async (req, res) => {
     const userList = await User.find().select('-passwordHash');
-
     if(!userList){
         res.status(500).json({success: false});
     };
@@ -103,29 +102,30 @@ router.delete('/:id', (req, res) => {
 //Authenticating user
 router.post('/login', async (req, res) => {
     const user = await User.findOne({email: req.body.email});
-
+    const secret = process.env.secret;
     if(!user){
-        return res.status(400).send('The user not found');
+        return res.status(400).send('The user not found.');
     }
 
     if(user && bcrypt.compareSync(req.body.password, user.passwordHash)){
-
+        
         //authenticating user with jwt
         const token = jwt.sign(
             {
                 userID: user.id
             },
-            'secret',
+            secret,
             {
                 //token expire
                 expiresIn: '1d'
             }
-        );
+        ); 
 
-        res.status(200).send({user: user.email, token: token})
+        res.status(200).send({user: user.email, token: token});
     } else {
         res.status(400).send('Incorrect password.');
-    }
+    } 
+    //return res.status(200).send(user);
 });
 
 module.exports = router;
