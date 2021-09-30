@@ -152,4 +152,22 @@ router.post('/register', async (req, res) => {
     res.send(user);
 })
 
+//Fetching total users count
+router.get(`/get/count`, async(req, res) => {
+    User.countDocuments().then(count => {
+        if (count) {
+            return res.status(200).json({ userCount: count });
+        } else {
+            return res.status(500).json({ success: false });
+        }
+    }).catch(err => {
+        return res.status(400).json({
+            success: false,
+            error: err
+        })
+    }); 
+  })
+
+  
+
 module.exports = router;
