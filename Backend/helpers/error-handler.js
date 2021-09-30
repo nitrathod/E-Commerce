@@ -11,4 +11,6 @@ function errorHandler(err, req, res, next) {
 
   //default error to 500 server error handler
   return res.status(500).json({message: "Server error!"})
-}
+};
+
+module.exports = errorHandler;
