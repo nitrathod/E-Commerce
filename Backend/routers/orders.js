@@ -1,16 +1,32 @@
-const {Order} = require('../models/order');
+const { Order } = require('../models/order');
 const express = require('express');
 const { OrderItem } = require('../models/order-item');
 const router = express.Router();
 
 //fetching all order details
 router.get(`/`, async (req, res) => {
-    const orderList = await Order.find();
+
+    //Fins user and then populate user name along with news order sorting on top
+    const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1});
 
     if(!orderList){
         res.status(500).json({success: false});
     }
     res.send(orderList);
+});
+
+//Fetching specific user name using id
+router.get(`/:id`, async (req, res) => {
+
+    //Fins user by ID and then populate user name.
+    const order = await Order.findById(req.params.id)
+    .populate('user', 'name')
+    .populate('orderItems');
+
+    if(!order){
+        res.status(500).json({success: false});
+    }
+    res.send(order);
 });
 
 //Add order 
