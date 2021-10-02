@@ -96,8 +96,11 @@ router.put('/:id', async(req, res) => {
 
 //Delete order
 router.delete('/:id', (req, res) => {
-  Order.findByIdAndRemove(req.params.id).then(order => {
+ Order.findByIdAndRemove(req.params.id).then(async order => {
       if(order){
+        await order.orderItems.map(async orderItems => {
+          await OrderItem.findByIdAndRemove(orderItems);
+        })
           return res.status(200).json({ success: true, message: 'the order is deleted!'});
       } else {
           return res.status(404).json({ success : false, message: 'order not found!'});
@@ -105,6 +108,7 @@ router.delete('/:id', (req, res) => {
   }).catch(err => {
       return res.status(400).json({success: false, error: err});
   })
+  
 });
 
 module.exports = router;
