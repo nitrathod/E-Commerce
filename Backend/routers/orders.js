@@ -5,7 +5,7 @@ const router = express.Router();
 
 //fetching all order details
 router.get(`/`, async (req, res) => {
-  //Fins user and then populate user name along with news order sorting on top
+  //Find user and then populate user name along with news order sorting on top
   const orderList = await Order.find()
     .populate("user", "name")
     .sort({ dateOrdered: -1 });
@@ -149,6 +149,25 @@ router.get(`/get/count`, async (req, res) => {
   res.send({
     orderCount: orderCount,
   });
+});
+
+//Displaying order history to specific user
+router.get(`/get/userorders/:userid`, async (req, res) => {
+  //Find user and then populate user name along with news order sorting on top
+  const userOrderList = await Order.find({user: req.params.userid})
+    .populate({
+      path: "orderItems",
+      populate: {
+        path: "product",
+        populate: "category",
+      },
+    })
+    .sort({ 'dateOrdered': -1 });
+
+  if (!userOrderList) {
+    res.status(500).json({ success: false });
+  }
+  res.send(userOrderList);
 });
 
 module.exports = router;
