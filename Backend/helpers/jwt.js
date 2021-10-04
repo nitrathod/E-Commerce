@@ -9,6 +9,7 @@ function authJwT(){
     }).unless({
         path: [
             //excluding products, login and register from jwt, /\/api\/v1\.. is regular string
+            {url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS']},
             {url: /\/api\/v1\/products(.*)/, methods: ['GET', 'OPTIONS']},
             {url: /\/api\/v1\/categories(.*)/, methods: ['GET', 'OPTIONS']},
             `/api/v1/users/login`,
