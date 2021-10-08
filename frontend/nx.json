@@ -40,6 +40,9 @@
         "hastkala-e2e": {
             "tags": [],
             "implicitDependencies": ["hastkala"]
+        },
+        "ui": {
+            "tags": []
         }
     }
 }
