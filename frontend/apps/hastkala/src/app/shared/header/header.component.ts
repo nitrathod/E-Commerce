@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'frontend-header',
+  selector: 'hastkala-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -9,7 +9,8 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { 
+    
+   }
 
 }

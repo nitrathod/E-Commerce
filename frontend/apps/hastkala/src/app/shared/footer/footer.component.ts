@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'frontend-footer',
+  selector: 'hastkala-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
