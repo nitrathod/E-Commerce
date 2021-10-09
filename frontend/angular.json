@@ -228,6 +228,44 @@
                 }
             }
         },
+        "orders": {
+            "projectType": "library",
+            "root": "libs/orders",
+            "sourceRoot": "libs/orders/src",
+            "prefix": "orders",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:ng-packagr-lite",
+                    "outputs": ["dist/libs/orders"],
+                    "options": {
+                        "project": "libs/orders/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/orders/tsconfig.lib.prod.json"
+                        },
+                        "development": {
+                            "tsConfig": "libs/orders/tsconfig.lib.json"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/orders"],
+                    "options": {
+                        "jestConfig": "libs/orders/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/orders/src/**/*.ts", "libs/orders/src/**/*.html"]
+                    }
+                }
+            }
+        },
         "products": {
             "projectType": "library",
             "root": "libs/products",
