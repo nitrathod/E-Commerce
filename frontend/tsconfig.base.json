@@ -16,7 +16,8 @@
         "baseUrl": ".",
         "paths": {
             "@frontend/products": ["libs/products/src/index.ts"],
-            "@frontend/ui": ["libs/ui/src/index.ts"]
+            "@frontend/ui": ["libs/ui/src/index.ts"],
+            "@frontend/users": ["libs/users/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]
