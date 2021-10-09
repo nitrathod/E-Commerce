@@ -15,6 +15,7 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
+            "@frontend/products": ["libs/products/src/index.ts"],
             "@frontend/ui": ["libs/ui/src/index.ts"]
         }
     },

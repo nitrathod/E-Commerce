@@ -41,6 +41,9 @@
             "tags": [],
             "implicitDependencies": ["hastkala"]
         },
+        "products": {
+            "tags": []
+        },
         "ui": {
             "tags": []
         }
